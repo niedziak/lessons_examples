@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PLAYER HIT/HEAL EXAMPLE</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: 'Courier New', Courier, monospace;
+            text-align: center;
+            font-size: xx-large;
+        }
+        
+        p {
+            display: inline;
+        }
+
+        button {
+            color: white;
+            background-color: black;
+            height: 100px;
+            width: 140px;
+            margin: 20px;
+            border: solid 3px white;
+            border-radius: 5px;
+            font-family: 'Courier New', Courier, monospace;
+            text-align: center;
+            font-size: x-large;
+        }
+    </style>
+</head>
+<body>
+    <!-- paragraf wyświetlający HP gracza -->
+    <p id="HPp">Player HP: 100</p> <br>
+    <!-- paragraf wyświetlający status gracza -->
+    <p id="STATUSp">Player status: SUPER</p>
+    <br>
+    <!-- przycisk raniący gracza (przesyła argument -10 do parametru "dmg" funkcji zmieniającej HP) -->
+    <button onclick='HPchange(-10)'>HIT PLAYER</button>
+    <!-- przycisk leczący gracza (przesyła argument 10 do parametru "dmg" funkcji zmieniającej HP) -->
+    <button onclick='HPchange(10)'>HEAL PLAYER</button>
+
+    <script>
+        var playerHP = 100; // zadeklarowanie zmiennej przetrzymującej HP gracza
+
+        /* zmienna playerHP jest zadeklarowana poza funkcjami, więc jest globalna i każda funkcja może się do niej odnieść */
+
+        // funkcja zmieniająca HP gracza
+        function HPchange(dmg) {
+            playerHP += dmg; // zmiana hp o przekazany do funkcji argument przez parametr "dmg"
+
+            // testowanie czy HP gracza spadło poniżej 0 i ustawienie go na 0 jeśli tak
+            if (playerHP < 0) {
+                playerHP = 0;
+            } else if (playerHP > 100) { //dodatkowe testowanie jeśli HP gracza wzrosło powyżej 100, nie zachodzi jeśli pierwszy if był prawdą
+                playerHP = 100;
+            }
+            
+            /*
+            if testuje czy wyrażenie w nawiasach jest "true" czy "false" 
+            jeśli jest "true" to kod w klamrach jest wykonywany
+            jeśli jest "false", to przechodzi do if else, albo else, albo kończy działanie w zależności co jest po nim
+            */
+
+            // if sprawdzający stan HP i aktualizujący status gracza
+            if (playerHP == 100) {
+                document.getElementById("STATUSp").innerHTML = "Player status: SUPER";
+            } else if (playerHP == 0) {
+                document.getElementById("STATUSp").innerHTML = "Player status: You're DEAD!";
+            } else {
+                document.getElementById("STATUSp").innerHTML = "Player status: OK";
+            }
+
+            /*
+            testowanie czy zmienna równa się jakiejść wartości to DWA ZNAKI RÓWNOŚCI (==), NIE JEDNO
+            jeżeli wpiszemy jeden znak równości (=) w if, to if zamiast porównać zmienną do danej wartości po prostu przypisze ją do niej
+            */
+
+            // aktualizacja HP gracza na stronie
+            document.getElementById("HPp").innerHTML = "Player HP: " + playerHP;
+        }
+    </script>
+</body>
+</html>
