@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random events</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            text-align: center;
+            font-size: xx-large;
+        }
+        
+        p {
+            display: inline;
+        }
+
+        button {
+            color: white;
+            background-color: black;
+            height: 50px;
+            width: 100px;
+            margin: 20px;
+            border: solid 2px white;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- przycisk uruchamiający funkcję losującą zdarzenie losowe -->
+    <button onclick="randomEvent()">RANDOM EVENT</button>
+    
+    <br>
+
+    <!-- paragraf w którym będą wyświetlane wydarzenia losowe -->
+    <p id="randomEvent"></p>
+
+<script>
+    // deklaracja funkcji generującej wydarzenia losowe
+    function randomEvent() {
+        var rn = Math.ceil(Math.random() * 10) // zmienna, której przypisywana jest liczba losowa od 1 do 10 (Math.random generuje liczbę, Math.ceil zaokrągla ją w górę do liczby całkowitej)
+        /* switch porównuje zmienną rn z każdym przypadkiem (case),
+           "break" przerywa działanie po wykonaniu case'a, bez niego switch wykonywał by wszystkie case'y po pierwszym, który był prawdziwy,
+           switch porównuje zarówno wartość jak i typ zmiennej (===), jeśli wartości będą takie same ale typ inny to porównanie będzie nieprawdziwe */ 
+        switch (rn) {
+            // default działa jak "else" w "if", jest wykonywany jeśli wartość porównywana nie zgadzała się z żadnym case'em
+            // default może znajdować się na początku lub na końcu switch'a
+            default:
+                document.getElementById("randomEvent").innerHTML = "Nie znalazłeś niczego";
+                break;
+            case 1:
+            case 2:
+                document.getElementById("randomEvent").innerHTML = "Znalazłeś miecz";
+                break;
+            case 3:
+            case 4:
+            case 5:
+                document.getElementById("randomEvent").innerHTML = "Znalazłeś topór";
+                break;
+            case 6:
+                document.getElementById("randomEvent").innerHTML = "Znalazłeś uran";
+                break;
+        }
+    }
+
+</script>
+
+</body>
+</html>
